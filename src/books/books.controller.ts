@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { BooksService } from './books.service';
 import { AddBookDTO } from './dto/add-book.dto';
 import { ResponseTransformerDTO } from 'src/common/dtos/response-transform.dto';
@@ -6,6 +14,8 @@ import { CustomAPIOkResponse } from 'src/common/decorators/custom-ok-response.de
 import { AddBookResponseDTO } from './dto/add-book-response.dto';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { UpdateBookDTO } from './dto/update-book.dto';
+import { UpdateBookResponseDTO } from './dto/update-book-response.dto';
+import { DeleteBookResponseDTO } from './dto/delete-book-response.dto';
 
 @Controller('books')
 export class BooksController {
@@ -44,8 +54,17 @@ export class BooksController {
   @Put(':id')
   @ApiOperation({ summary: 'Update a book' })
   @ApiBody({ type: UpdateBookDTO })
+  @CustomAPIOkResponse(UpdateBookResponseDTO)
   async updateBook(@Body() payload: UpdateBookDTO, @Param('id') id: string) {
     const response = await this.booksService.updateBook(payload, +id);
+    return ResponseTransformerDTO.OK(response);
+  }
+
+  @Delete(':id')
+  @ApiOperation({ summary: 'Delete a book' })
+  @CustomAPIOkResponse(DeleteBookResponseDTO)
+  async deleteBook(@Param('id') id: string) {
+    const response = await this.booksService.deleteBook(+id);
     return ResponseTransformerDTO.OK(response);
   }
 }

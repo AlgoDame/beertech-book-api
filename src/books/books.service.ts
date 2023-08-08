@@ -41,6 +41,17 @@ export class BooksService {
       throw error;
     }
     await this.bookRepository.update<Book>(payload, { where: { id } });
-    return `Book with id ${id} was updated successfully.`;
+    return { response: `Book with id ${id} was updated successfully.` };
+  }
+
+  async deleteBook(id: number) {
+    const book = await this.bookRepository.findByPk<Book>(id);
+    if (!book) {
+      const error: ResponseError = new Error('Book not found');
+      error.statusCode = 404;
+      throw error;
+    }
+    await this.bookRepository.destroy<Book>({ where: { id } });
+    return { response: `Book with id ${id} was deleted successfully.` };
   }
 }
