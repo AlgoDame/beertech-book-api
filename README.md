@@ -6,6 +6,7 @@ This is a sample REST API for managing books using NestJS.
 - Install dependencies: `npm install`
 
 ## Setup database:
+- Create a PostgreSQL database. Example sql : `CREATE DATABASE books_api;`
 - Update `.env` using `.env.sample` database
 
 ## Usage
