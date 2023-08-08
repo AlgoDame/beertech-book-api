@@ -44,3 +44,8 @@ Run the server and view docs at `/docs`
 - test : Unit and integration tests
 ## Testing
 Run tests: npm run test
+
+## Deployment
+- Deployed on Render
+- Live demo available at base URL:  https://beertech-books-api.onrender.com/api/v1
+- Live documentaion available at:  https://beertech-books-api.onrender.com/docs
