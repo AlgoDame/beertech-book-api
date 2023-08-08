@@ -9,7 +9,11 @@ export class BooksService {
   ) {}
 
   async addBook(book: AddBookDTO): Promise<Book> {
-    return await this.bookRepository.create<Book>(book);
+    return this.bookRepository.create<Book>(book);
+  }
+
+  async getBooks(): Promise<Book[]> {
+    return this.bookRepository.findAll<Book>();
   }
 
   //   async findOneByEmail(email: string): Promise<User> {
