@@ -7,19 +7,19 @@ export class UpdateBookDTO {
   @MinLength(3)
   @IsNotEmpty()
   @IsOptional()
-  title: string;
+  title?: string;
 
   @ApiProperty({ example: 'John Doe' })
   @IsString()
   @MinLength(5)
   @IsNotEmpty()
   @IsOptional()
-  author: string;
+  author?: string;
 
   @ApiProperty({ example: 'A sample book description' })
   @IsString()
   @MinLength(5)
   @IsNotEmpty()
   @IsOptional()
-  description: string;
+  description?: string;
 }

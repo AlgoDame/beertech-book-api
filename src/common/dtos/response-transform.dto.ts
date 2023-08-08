@@ -3,9 +3,9 @@ import { ApiProperty } from '@nestjs/swagger';
 export class ResponseTransformerDTO<T> {
   @ApiProperty({
     description: 'Status',
-    example: true,
+    example: 200,
   })
-  status: boolean;
+  statusCode: number;
 
   @ApiProperty({
     description: 'Message',
@@ -15,17 +15,17 @@ export class ResponseTransformerDTO<T> {
 
   data: T;
 
-  constructor(status: boolean, message: string, data: T) {
-    this.status = status;
+  constructor(statusCode: number, message: string, data: T) {
+    this.statusCode = statusCode;
     this.message = message;
     this.data = data;
   }
 
   static OK<T>(data: T, message = 'Successful') {
-    return new this(true, message, data);
+    return new this(200, message, data);
   }
 
   static CREATED<T>(data: T, message = 'Successfully created') {
-    return new this(true, message, data);
+    return new this(201, message, data);
   }
 }
