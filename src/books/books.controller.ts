@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { AddBookDTO } from './dto/add-book.dto';
 import { ResponseTransformerDTO } from 'src/common/dtos/response-transform.dto';
@@ -30,5 +30,13 @@ export class BooksController {
   async getBooks() {
     const books = await this.booksService.getBooks();
     return ResponseTransformerDTO.OK(books);
+  }
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Get a book' })
+  @CustomAPIOkResponse(AddBookResponseDTO)
+  async getBook(@Param('id') id: string) {
+    const book = await this.booksService.getBook(+id);
+    return ResponseTransformerDTO.OK(book);
   }
 }
